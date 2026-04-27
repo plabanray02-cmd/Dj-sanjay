@@ -1,8 +1,9 @@
-# Dj-sanjay  <!DOCTYPE html>
+# Dj-sanjay  
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DJ Sanjay | Premium DJ Service</title>
+<title>DJ Sanjay | Premium DJ</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
@@ -11,13 +12,13 @@
 body{background:#0a0a0a;color:#fff;}
 
 header{
-background:linear-gradient(135deg,#000,#111,#1e90ff);
-padding:60px 20px;
+background:linear-gradient(135deg,#000,#1e90ff);
+padding:70px 20px;
 text-align:center;
 }
 
-header h1{font-size:32px;}
-header p{opacity:0.8;margin-top:10px;}
+header h1{font-size:35px;}
+header p{opacity:0.8;margin:10px 0;}
 
 .btn{
 display:inline-block;
@@ -25,8 +26,8 @@ margin:10px;
 padding:12px 25px;
 background:#1e90ff;
 color:white;
-text-decoration:none;
 border-radius:30px;
+text-decoration:none;
 }
 
 .section{padding:40px 20px;text-align:center;}
@@ -41,12 +42,11 @@ gap:15px;
 background:#111;
 padding:20px;
 border-radius:15px;
-box-shadow:0 0 15px rgba(0,0,0,0.5);
 transition:0.3s;
 }
 
 .card:hover{
-transform:scale(1.05);
+transform:scale(1.08);
 background:#1e90ff;
 }
 
@@ -56,11 +56,37 @@ border-radius:10px;
 margin:10px 0;
 }
 
-footer{
-padding:20px;
-background:#000;
-text-align:center;
-opacity:0.7;
+form input, form textarea{
+width:90%;
+margin:10px;
+padding:12px;
+border:none;
+border-radius:10px;
+}
+
+form button{
+padding:12px 30px;
+border:none;
+background:#1e90ff;
+color:white;
+border-radius:25px;
+}
+
+iframe{
+width:100%;
+height:250px;
+border-radius:10px;
+margin-top:15px;
+}
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+padding:15px;
+border-radius:50%;
+font-size:20px;
 }
 </style>
 </head>
@@ -76,44 +102,55 @@ opacity:0.7;
 </header>
 
 <div class="section">
-<h2>🔥 Our Services</h2>
-
+<h2>🔥 Services</h2>
 <div class="services">
 <div class="card">🎧 DJ Setup</div>
-<div class="card">🔊 Sound System</div>
-<div class="card">💡 Lighting Setup</div>
-<div class="card">🎉 Wedding Party</div>
-<div class="card">🎂 Birthday Event</div>
+<div class="card">🔊 Sound Box</div>
+<div class="card">💡 DJ Light</div>
 <div class="card">🎤 Stage Setup</div>
+<div class="card">🎉 Wedding</div>
+<div class="card">🎂 Birthday</div>
+</div>
 </div>
 
+<div class="section">
+<h2>🎬 Event Video</h2>
+<video width="100%" controls autoplay muted loop>
+<source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+</video>
 </div>
 
 <div class="section gallery">
 <h2>📸 Gallery</h2>
-
 <img src="https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2">
 <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30">
 <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819">
+</div>
 
+<div class="section">
+<h2>📅 Book Now</h2>
+<form>
+<input type="text" placeholder="Your Name" required><br>
+<input type="tel" placeholder="Phone Number" required><br>
+<textarea placeholder="Event Details"></textarea><br>
+<button type="submit">Submit</button>
+</form>
 </div>
 
 <div class="section">
 <h2>📍 Location</h2>
-<p>Salkumarhat Road, Alipurduar, West Bengal</p>
+<iframe src="https://maps.google.com/maps?q=Alipurduar&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
 </div>
 
 <div class="section">
 <h2>⭐ Why Choose Us</h2>
-<p>✔ High Quality Sound</p>
-<p>✔ Latest DJ Lights</p>
+<p>✔ High Bass Sound</p>
+<p>✔ Premium Lights</p>
 <p>✔ Affordable Price</p>
-<p>✔ Fast Setup</p>
+<p>✔ Fast Service</p>
 </div>
 
-<footer>
-<p>© 2026 DJ Sanjay | All Rights Reserved</p>
-</footer>
+<a class="whatsapp" href="https://wa.me/919832084397">💬</a>
 
 </body>
 </html>
