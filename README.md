@@ -9,76 +9,127 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
-body{background:#0a0a0a;color:#fff;}
 
-header{
-background:linear-gradient(135deg,#000,#1e90ff);
-padding:70px 20px;
-text-align:center;
+body{
+background:#050505;
+color:white;
+overflow-x:hidden;
 }
 
-header h1{font-size:35px;}
-header p{opacity:0.8;margin:10px 0;}
+/* Animated Gradient Background */
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:linear-gradient(45deg,#0f0c29,#302b63,#24243e,#1e90ff);
+background-size:400% 400%;
+animation:gradientMove 12s ease infinite;
+z-index:-1;
+}
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
 
+/* Header */
+header{
+padding:90px 20px;
+text-align:center;
+animation:fadeIn 2s ease;
+}
+
+header h1{
+font-size:42px;
+letter-spacing:2px;
+text-shadow:0 0 25px #1e90ff;
+}
+
+header p{
+opacity:0.8;
+margin:10px 0 20px;
+}
+
+/* Buttons */
 .btn{
 display:inline-block;
+padding:12px 28px;
 margin:10px;
-padding:12px 25px;
+border-radius:30px;
+background:transparent;
+border:2px solid #1e90ff;
+color:#1e90ff;
+text-decoration:none;
+transition:0.3s;
+}
+.btn:hover{
 background:#1e90ff;
 color:white;
-border-radius:30px;
-text-decoration:none;
+box-shadow:0 0 20px #1e90ff;
+transform:translateY(-3px);
 }
 
-.section{padding:40px 20px;text-align:center;}
+/* Sections */
+.section{
+padding:60px 20px;
+text-align:center;
+opacity:0;
+transform:translateY(60px);
+transition:1s;
+}
+.section.show{
+opacity:1;
+transform:translateY(0);
+}
 
+/* Service Cards */
 .services{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-gap:15px;
+gap:20px;
+margin-top:20px;
 }
 
 .card{
-background:#111;
-padding:20px;
+padding:25px;
 border-radius:15px;
-transition:0.3s;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+transition:0.4s;
 }
-
 .card:hover{
-transform:scale(1.08);
-background:#1e90ff;
+transform:translateY(-10px) scale(1.05);
+box-shadow:0 0 25px #1e90ff;
+border-color:#1e90ff;
 }
 
+/* Gallery */
 .gallery img{
 width:100%;
-border-radius:10px;
+border-radius:12px;
 margin:10px 0;
+transition:0.5s;
+}
+.gallery img:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #1e90ff;
 }
 
-form input, form textarea{
-width:90%;
-margin:10px;
-padding:12px;
-border:none;
-border-radius:10px;
+/* Why section */
+.why p{
+margin:8px 0;
 }
 
-form button{
-padding:12px 30px;
-border:none;
-background:#1e90ff;
-color:white;
-border-radius:25px;
+/* Footer */
+footer{
+padding:20px;
+text-align:center;
+opacity:0.6;
 }
 
-iframe{
-width:100%;
-height:250px;
-border-radius:10px;
-margin-top:15px;
-}
-
+/* WhatsApp floating */
 .whatsapp{
 position:fixed;
 bottom:20px;
@@ -87,6 +138,13 @@ background:#25D366;
 padding:15px;
 border-radius:50%;
 font-size:20px;
+box-shadow:0 0 15px #25D366;
+}
+
+/* Animation */
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(-30px);}
+to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
@@ -95,29 +153,22 @@ font-size:20px;
 
 <header>
 <h1>DJ SANJAY</h1>
-<p>Premium Sound • Light • DJ Setup</p>
+<p>Premium Sound • Light • Event Setup</p>
 
-<a class="btn" href="tel:919832084397">📞 Call</a>
+<a class="btn" href="tel:919832084397">📞 Call Now</a>
 <a class="btn" href="https://wa.me/919832084397">💬 WhatsApp</a>
 </header>
 
 <div class="section">
-<h2>🔥 Services</h2>
+<h2>🔥 Our Services</h2>
 <div class="services">
 <div class="card">🎧 DJ Setup</div>
-<div class="card">🔊 Sound Box</div>
-<div class="card">💡 DJ Light</div>
+<div class="card">🔊 Sound System</div>
+<div class="card">💡 DJ Lights</div>
 <div class="card">🎤 Stage Setup</div>
-<div class="card">🎉 Wedding</div>
-<div class="card">🎂 Birthday</div>
+<div class="card">🎉 Wedding Events</div>
+<div class="card">🎂 Birthday Party</div>
 </div>
-</div>
-
-<div class="section">
-<h2>🎬 Event Video</h2>
-<video width="100%" controls autoplay muted loop>
-<source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-</video>
 </div>
 
 <div class="section gallery">
@@ -127,30 +178,31 @@ font-size:20px;
 <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819">
 </div>
 
-<div class="section">
-<h2>📅 Book Now</h2>
-<form>
-<input type="text" placeholder="Your Name" required><br>
-<input type="tel" placeholder="Phone Number" required><br>
-<textarea placeholder="Event Details"></textarea><br>
-<button type="submit">Submit</button>
-</form>
-</div>
-
-<div class="section">
-<h2>📍 Location</h2>
-<iframe src="https://maps.google.com/maps?q=Alipurduar&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
-</div>
-
-<div class="section">
+<div class="section why">
 <h2>⭐ Why Choose Us</h2>
-<p>✔ High Bass Sound</p>
-<p>✔ Premium Lights</p>
+<p>✔ High Quality Bass Sound</p>
+<p>✔ Premium DJ Lighting</p>
 <p>✔ Affordable Price</p>
-<p>✔ Fast Service</p>
+<p>✔ Fast & Reliable Service</p>
 </div>
+
+<footer>
+<p>© 2026 DJ Sanjay | All Rights Reserved</p>
+</footer>
 
 <a class="whatsapp" href="https://wa.me/919832084397">💬</a>
+
+<script>
+const sections = document.querySelectorAll('.section');
+window.addEventListener('scroll', () => {
+sections.forEach(sec => {
+const top = sec.getBoundingClientRect().top;
+if(top < window.innerHeight - 100){
+sec.classList.add('show');
+}
+});
+});
+</script>
 
 </body>
 </html>
