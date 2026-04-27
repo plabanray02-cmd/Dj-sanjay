@@ -35,17 +35,10 @@ z-index:-2;
 100%{background-position:0%;}
 }
 
-/* Particles canvas */
-#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
-
 /* Cursor */
 .cursor{
-position:fixed;
-width:20px;height:20px;
-border-radius:50%;
-background:#1e90ff;
-pointer-events:none;
-transform:translate(-50%,-50%);
+position:fixed;width:20px;height:20px;border-radius:50%;
+background:#1e90ff;pointer-events:none;
 box-shadow:0 0 20px #1e90ff;
 z-index:9999;
 }
@@ -71,27 +64,50 @@ transform:translateY(0) scale(1);
 filter:blur(0);
 }
 
-/* Cards */
-.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;}
-.card{padding:20px;border-radius:12px;background:rgba(255,255,255,0.05);transition:0.3s;}
-.card:hover{transform:scale(1.05);box-shadow:0 0 20px #1e90ff;}
+/* Services */
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+.card{
+padding:25px;border-radius:15px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+transition:0.4s;position:relative;overflow:hidden;
+}
+.card:hover{
+transform:translateY(-10px) scale(1.05);
+box-shadow:0 0 25px #1e90ff;
+}
+.card h3{color:#1e90ff;margin-bottom:10px;}
+.card p{font-size:14px;opacity:0.8;}
+
+/* Review */
+.review-box{
+max-width:400px;margin:auto;padding:20px;
+background:rgba(255,255,255,0.05);
+border-radius:10px;
+}
+
+/* Stars */
+.stars span{
+font-size:25px;
+cursor:pointer;
+color:gray;
+}
+.stars span.active{color:gold;}
 
 /* Form */
 form input, form textarea{
 width:90%;margin:10px;padding:12px;border-radius:10px;border:none;
 background:rgba(255,255,255,0.05);color:white;
-transition:0.3s;
 }
-form input:focus{box-shadow:0 0 15px #1e90ff;transform:scale(1.03);}
-
-/* Button */
-button{padding:12px 30px;background:#1e90ff;border:none;color:white;border-radius:25px;}
-
-/* WhatsApp */
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:15px;border-radius:50%;}
 
 /* Footer */
 footer{text-align:center;padding:20px;opacity:0.6;}
+
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:15px;border-radius:50%;}
 </style>
 </head>
 
@@ -99,7 +115,6 @@ footer{text-align:center;padding:20px;opacity:0.6;}
 
 <div id="loader"><div class="circle"></div></div>
 <div id="progress"></div>
-<canvas id="particles"></canvas>
 <div class="cursor"></div>
 
 <header>
@@ -109,26 +124,43 @@ footer{text-align:center;padding:20px;opacity:0.6;}
 <a class="btn" href="https://wa.me/919832084397">WhatsApp</a>
 </header>
 
+<!-- SERVICES -->
 <div class="section">
-<h2>Services</h2>
+<h2>🔥 Our Premium Services</h2>
 <div class="services">
-<div class="card">DJ Setup</div>
-<div class="card">Sound</div>
-<div class="card">Lights</div>
-<div class="card">Wedding</div>
+<div class="card"><h3>🎧 DJ Setup</h3><p>High bass DJ system</p></div>
+<div class="card"><h3>🔊 Sound System</h3><p>Crystal clear sound</p></div>
+<div class="card"><h3>💡 Lighting</h3><p>LED & laser lights</p></div>
+<div class="card"><h3>🎤 Stage Setup</h3><p>Full stage support</p></div>
+<div class="card"><h3>🎉 Wedding</h3><p>Wedding DJ package</p></div>
+<div class="card"><h3>🎂 Birthday</h3><p>Party DJ setup</p></div>
 </div>
 </div>
 
+<!-- BOOKING -->
 <div class="section">
-<h2>Book Now</h2>
+<h2>📅 Book Now</h2>
 <form id="bookingForm">
 <input type="text" id="name" placeholder="Name" required>
 <input type="tel" id="phone" placeholder="Phone" required>
 <input type="date" id="date" required>
 <input type="time" id="time" required>
-<textarea id="details" placeholder="Event Details"></textarea>
-<button type="submit">Book Now</button>
+<textarea id="details" placeholder="Details"></textarea>
+<button>Book</button>
 </form>
+</div>
+
+<!-- REVIEW -->
+<div class="section">
+<h2>⭐ Customer Reviews</h2>
+
+<div class="review-box">
+<p id="reviewText">"Best DJ service 🔥"</p>
+<div class="stars" id="stars">
+<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+</div>
+</div>
+
 </div>
 
 <footer>© DJ Sanjay</footer>
@@ -136,11 +168,11 @@ footer{text-align:center;padding:20px;opacity:0.6;}
 
 <script>
 // Loader
-window.onload=()=>{document.getElementById("loader").style.display="none";};
+window.onload=()=>{loader.style.display="none";};
 
 // Typing
-let text="DJ SANJAY";let i=0;
-function type(){if(i<text.length){document.querySelector("h1").innerHTML+=text.charAt(i);i++;setTimeout(type,100);}}
+let t="DJ SANJAY",i=0;
+function type(){if(i<t.length){document.querySelector("h1").innerHTML+=t[i++];setTimeout(type,100);}}
 type();
 
 // Scroll
@@ -157,44 +189,46 @@ sec.classList.add('show');
 window.addEventListener("scroll",()=>{
 let s=document.documentElement.scrollTop;
 let h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-document.getElementById("progress").style.width=(s/h)*100+"%";
+progress.style.width=(s/h)*100+"%";
 });
 
 // Cursor
-const cursor=document.querySelector(".cursor");
 document.addEventListener("mousemove",e=>{
 cursor.style.left=e.clientX+"px";
 cursor.style.top=e.clientY+"px";
 });
 
-// Particles
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");
-canvas.width=innerWidth;canvas.height=innerHeight;
-let p=[];for(let i=0;i<50;i++){p.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height});}
-function draw(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle="#1e90ff";
-p.forEach(pt=>{
-ctx.beginPath();
-ctx.arc(pt.x,pt.y,2,0,Math.PI*2);
-ctx.fill();
-pt.y+=0.5;if(pt.y>canvas.height)pt.y=0;
-});
-requestAnimationFrame(draw);
-}
-draw();
-
 // Disable past date
-let today=new Date().toISOString().split("T")[0];
-document.getElementById("date").setAttribute("min",today);
+date.min=new Date().toISOString().split("T")[0];
 
-// Booking WhatsApp
-document.getElementById("bookingForm").addEventListener("submit",function(e){
+// WhatsApp booking
+bookingForm.onsubmit=e=>{
 e.preventDefault();
-let msg=`Booking:%0AName:${name.value}%0APhone:${phone.value}%0ADate:${date.value}%0ATime:${time.value}%0ADetails:${details.value}`;
-window.open("https://wa.me/919832084397?text="+msg,"_blank");
+let msg=`Booking:%0A${name.value}%0A${phone.value}%0A${date.value}%0A${time.value}`;
+window.open("https://wa.me/919832084397?text="+msg);
+};
+
+// ⭐ Star rating
+let stars=document.querySelectorAll("#stars span");
+stars.forEach((star,i)=>{
+star.onclick=()=>{
+stars.forEach(s=>s.classList.remove("active"));
+for(let j=0;j<=i;j++)stars[j].classList.add("active");
+};
 });
+
+// 💬 Auto review slider
+let reviews=[
+"🔥 Amazing sound quality!",
+"🎉 Best DJ in town!",
+"💯 Fully satisfied service!"
+];
+let r=0;
+setInterval(()=>{
+r=(r+1)%reviews.length;
+document.getElementById("reviewText").innerText=reviews[r];
+},3000);
+
 </script>
 
 </body>
