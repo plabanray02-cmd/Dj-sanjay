@@ -16,7 +16,39 @@ color:white;
 overflow-x:hidden;
 }
 
-/* Animated Gradient Background */
+/* 🔥 Loader */
+#loader{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+.circle{
+width:50px;
+height:50px;
+border:5px solid #1e90ff;
+border-top:5px solid transparent;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* 🔥 Progress Bar */
+#progress{
+position:fixed;
+top:0;
+left:0;
+height:4px;
+background:#1e90ff;
+width:0%;
+z-index:999;
+}
+
+/* 🌈 Animated Background */
 body::before{
 content:"";
 position:fixed;
@@ -39,17 +71,11 @@ padding:90px 20px;
 text-align:center;
 animation:fadeIn 2s ease;
 }
-
 header h1{
 font-size:42px;
-letter-spacing:2px;
 text-shadow:0 0 25px #1e90ff;
 }
-
-header p{
-opacity:0.8;
-margin:10px 0 20px;
-}
+header p{opacity:0.8;margin:10px 0;}
 
 /* Buttons */
 .btn{
@@ -57,7 +83,6 @@ display:inline-block;
 padding:12px 28px;
 margin:10px;
 border-radius:30px;
-background:transparent;
 border:2px solid #1e90ff;
 color:#1e90ff;
 text-decoration:none;
@@ -70,7 +95,7 @@ box-shadow:0 0 20px #1e90ff;
 transform:translateY(-3px);
 }
 
-/* Sections */
+/* Section */
 .section{
 padding:60px 20px;
 text-align:center;
@@ -83,14 +108,12 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* Service Cards */
+/* Cards */
 .services{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
 gap:20px;
-margin-top:20px;
 }
-
 .card{
 padding:25px;
 border-radius:15px;
@@ -102,7 +125,6 @@ transition:0.4s;
 .card:hover{
 transform:translateY(-10px) scale(1.05);
 box-shadow:0 0 25px #1e90ff;
-border-color:#1e90ff;
 }
 
 /* Gallery */
@@ -117,9 +139,20 @@ transform:scale(1.05);
 box-shadow:0 0 20px #1e90ff;
 }
 
-/* Why section */
-.why p{
-margin:8px 0;
+/* Form */
+form input, form textarea{
+width:90%;
+margin:10px;
+padding:12px;
+border:none;
+border-radius:10px;
+}
+button{
+padding:12px 30px;
+background:#1e90ff;
+border:none;
+color:white;
+border-radius:25px;
 }
 
 /* Footer */
@@ -129,7 +162,7 @@ text-align:center;
 opacity:0.6;
 }
 
-/* WhatsApp floating */
+/* WhatsApp */
 .whatsapp{
 position:fixed;
 bottom:20px;
@@ -137,7 +170,6 @@ right:20px;
 background:#25D366;
 padding:15px;
 border-radius:50%;
-font-size:20px;
 box-shadow:0 0 15px #25D366;
 }
 
@@ -151,23 +183,28 @@ to{opacity:1;transform:translateY(0);}
 
 <body>
 
+<!-- Loader -->
+<div id="loader"><div class="circle"></div></div>
+
+<!-- Progress -->
+<div id="progress"></div>
+
 <header>
 <h1>DJ SANJAY</h1>
 <p>Premium Sound • Light • Event Setup</p>
-
-<a class="btn" href="tel:919832084397">📞 Call Now</a>
+<a class="btn" href="tel:919832084397">📞 Call</a>
 <a class="btn" href="https://wa.me/919832084397">💬 WhatsApp</a>
 </header>
 
 <div class="section">
-<h2>🔥 Our Services</h2>
+<h2>🔥 Services</h2>
 <div class="services">
 <div class="card">🎧 DJ Setup</div>
 <div class="card">🔊 Sound System</div>
 <div class="card">💡 DJ Lights</div>
 <div class="card">🎤 Stage Setup</div>
-<div class="card">🎉 Wedding Events</div>
-<div class="card">🎂 Birthday Party</div>
+<div class="card">🎉 Wedding</div>
+<div class="card">🎂 Birthday</div>
 </div>
 </div>
 
@@ -178,29 +215,52 @@ to{opacity:1;transform:translateY(0);}
 <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819">
 </div>
 
-<div class="section why">
+<div class="section">
+<h2>📅 Book Now</h2>
+<form>
+<input type="text" placeholder="Name" required><br>
+<input type="tel" placeholder="Phone" required><br>
+<textarea placeholder="Event Details"></textarea><br>
+<button>Submit</button>
+</form>
+</div>
+
+<div class="section">
 <h2>⭐ Why Choose Us</h2>
-<p>✔ High Quality Bass Sound</p>
-<p>✔ Premium DJ Lighting</p>
+<p>✔ High Bass Sound</p>
+<p>✔ Premium Lighting</p>
 <p>✔ Affordable Price</p>
-<p>✔ Fast & Reliable Service</p>
+<p>✔ Fast Service</p>
 </div>
 
 <footer>
-<p>© 2026 DJ Sanjay | All Rights Reserved</p>
+<p>© 2026 DJ Sanjay</p>
 </footer>
 
 <a class="whatsapp" href="https://wa.me/919832084397">💬</a>
 
 <script>
-const sections = document.querySelectorAll('.section');
-window.addEventListener('scroll', () => {
-sections.forEach(sec => {
-const top = sec.getBoundingClientRect().top;
-if(top < window.innerHeight - 100){
+// Loader
+window.onload = () => {
+document.getElementById("loader").style.display="none";
+};
+
+// Scroll animation
+const sections=document.querySelectorAll('.section');
+window.addEventListener('scroll',()=>{
+sections.forEach(sec=>{
+if(sec.getBoundingClientRect().top < window.innerHeight-100){
 sec.classList.add('show');
 }
 });
+});
+
+// Progress bar
+window.addEventListener("scroll",()=>{
+let scrollTop=document.documentElement.scrollTop;
+let height=document.documentElement.scrollHeight - document.documentElement.clientHeight;
+let scrolled=(scrollTop/height)*100;
+document.getElementById("progress").style.width=scrolled+"%";
 });
 </script>
 
